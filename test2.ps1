@@ -12,3 +12,4 @@ $itemclasses = Invoke-RestMethod -Uri "https://eu.api.blizzard.com/data/wow/item
 $auctionfile = Invoke-RestMethod -Uri "https://eu.api.blizzard.com/wow/auction/data/$($realm)?locale=$($locale)" -Method Get -Headers @{"Authorization" = "Bearer  $($token.access_token)"}
 $auctions = Invoke-RestMethod -Uri $auctionfile.files.url
 $petauctions = $auctions.auctions | where {$_.petspeciesid}
+$petauctions | ConvertTo-Csv | Out-File .\petauctions.csv 
